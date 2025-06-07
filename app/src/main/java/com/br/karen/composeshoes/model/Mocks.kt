@@ -1,4 +1,4 @@
-package com.br.karen.composeshoes.ui.model
+package com.br.karen.composeshoes.model
 
 val mockBottomAppBarItems = listOf(
     BottomAppBarItem.Home,

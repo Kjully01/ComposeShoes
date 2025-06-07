@@ -13,8 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.br.karen.composeshoes.ui.model.BottomAppBarItem
-import com.br.karen.composeshoes.ui.model.mockBottomAppBarItems
+import com.br.karen.composeshoes.model.BottomAppBarItem
+import com.br.karen.composeshoes.model.mockBottomAppBarItems
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable

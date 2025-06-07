@@ -1,4 +1,4 @@
-package com.br.karen.composeshoes.ui.model
+package com.br.karen.composeshoes.model
 
 import androidx.annotation.DrawableRes
 import com.br.karen.composeshoes.R
