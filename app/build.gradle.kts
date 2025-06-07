@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.br.karen.composeshoes"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.br.karen.composeshoes"
