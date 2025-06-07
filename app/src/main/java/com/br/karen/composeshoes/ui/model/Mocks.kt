@@ -5,3 +5,11 @@ val mockBottomAppBarItems = listOf(
     BottomAppBarItem.ShoppingCart,
     BottomAppBarItem.Profile
 )
+
+val mockCategories = listOf(
+    "Todos",
+    "Tênis",
+    "Botas",
+    "Chuteiras",
+    "Sapatênis"
+)
