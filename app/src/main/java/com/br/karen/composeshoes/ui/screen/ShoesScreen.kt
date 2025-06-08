@@ -31,10 +31,16 @@ import com.br.karen.composeshoes.ui.components.CategoriesFilter
 import com.br.karen.composeshoes.ui.components.IconButtonCustom
 import com.br.karen.composeshoes.ui.components.ProductContainer
 import com.br.karen.composeshoes.ui.components.SearchTextField
+import com.br.karen.composeshoes.ui.intent.AppUiIntent
+import com.br.karen.composeshoes.ui.state.AppUiState
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable
-fun ShoesScreen(modifier: Modifier = Modifier) {
+fun ShoesScreen(
+    modifier: Modifier = Modifier,
+    uiState: AppUiState,
+    onIntent: (AppUiIntent) -> Unit
+) {
     val focusManager = LocalFocusManager.current
     ComposeShoesTheme {
         Scaffold(
@@ -111,6 +117,9 @@ fun ShoesScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun ShoesScreenPreview() {
     ComposeShoesTheme {
-        ShoesScreen()
+        ShoesScreen(
+            uiState = AppUiState(),
+            onIntent = {}
+        )
     }
 }
