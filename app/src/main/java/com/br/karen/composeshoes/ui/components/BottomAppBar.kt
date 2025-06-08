@@ -21,18 +21,27 @@ import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 fun BottomAppBar(
     modifier: Modifier = Modifier,
     items: List<BottomAppBarItem>,
-    item: BottomAppBarItem
+    item: BottomAppBarItem,
+    onItemChange: (BottomAppBarItem) -> Unit
 ) {
-    NavigationBar (
+    NavigationBar(
         containerColor = MaterialTheme.colorScheme.background
     ) {
         items.forEach {
             val label = it.label
             NavigationBarItem(
-                icon = { Icon(painter = painterResource(it.icon), modifier = Modifier.size(24.dp), contentDescription = "label_$label") },
+                icon = {
+                    Icon(
+                        painter = painterResource(it.icon),
+                        modifier = Modifier.size(24.dp),
+                        contentDescription = "label_$label"
+                    )
+                },
                 label = { Text(text = label) },
                 selected = item.label == label,
-                onClick = {},
+                onClick = {
+                    onItemChange(it)
+                },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,
                     selectedTextColor = MaterialTheme.colorScheme.primary,
@@ -49,7 +58,7 @@ fun BottomAppBar(
 @Composable
 private fun BottomAppBarPreview() {
     ComposeShoesTheme {
-        BottomAppBar(items = mockBottomAppBarItems, item = mockBottomAppBarItems[0])
+        BottomAppBar(items = mockBottomAppBarItems, item = mockBottomAppBarItems[0], onItemChange = {})
     }
 
 }
