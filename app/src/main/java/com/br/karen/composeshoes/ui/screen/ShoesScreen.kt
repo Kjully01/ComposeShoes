@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.MaterialTheme
@@ -26,8 +27,9 @@ import androidx.compose.ui.unit.sp
 import com.br.karen.composeshoes.model.mockBottomAppBarItems
 import com.br.karen.composeshoes.model.mockCategories
 import com.br.karen.composeshoes.ui.components.BottomAppBar
-import com.br.karen.composeshoes.ui.components.IconButtonCustom
 import com.br.karen.composeshoes.ui.components.CategoriesFilter
+import com.br.karen.composeshoes.ui.components.IconButtonCustom
+import com.br.karen.composeshoes.ui.components.ProductContainer
 import com.br.karen.composeshoes.ui.components.SearchTextField
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
@@ -83,6 +85,22 @@ fun ShoesScreen(modifier: Modifier = Modifier) {
                     }
 
                     CategoriesFilter(categorias = mockCategories)
+
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 20.dp)
+                    ) {
+                        items(3) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                ProductContainer()
+                                ProductContainer()
+                            }
+                        }
+                    }
                 }
             }
         }
