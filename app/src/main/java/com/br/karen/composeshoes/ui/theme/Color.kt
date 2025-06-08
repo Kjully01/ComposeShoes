@@ -16,7 +16,7 @@ val MediumGray = Color(0xFF757575)
 
 val Gray = Color(0xFF9E9E9E)
 val LightGray = Color(0xFFBDBDBD)
-
+val ExtraLightGray = Color(0xFFEEEEEE)
 val White = Color(0xFFFFFFFF)
 
 val Orange = Color(0xFFFF8D41)

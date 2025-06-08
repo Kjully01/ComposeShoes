@@ -31,7 +31,8 @@ private val LightColorScheme = lightColorScheme(
     onSurface = MediumGray,
     onSurfaceVariant = Gray,
     inverseOnSurface = LightGray,
-    surface = LightGray
+    surface = LightGray,
+    outline = ExtraLightGray
 )
 
 @Composable

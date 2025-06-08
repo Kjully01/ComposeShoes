@@ -1,24 +1,39 @@
 package com.br.karen.composeshoes.ui.screen
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.AlignmentLine
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.br.karen.composeshoes.ui.components.BottomAppBar
 import com.br.karen.composeshoes.model.mockBottomAppBarItems
+import com.br.karen.composeshoes.model.mockCategories
+import com.br.karen.composeshoes.ui.components.BottomAppBar
+import com.br.karen.composeshoes.ui.components.IconButtonCustom
+import com.br.karen.composeshoes.ui.components.CategoriesFilter
+import com.br.karen.composeshoes.ui.components.SearchTextField
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable
 fun ShoesScreen(modifier: Modifier = Modifier) {
+    val focusManager = LocalFocusManager.current
     ComposeShoesTheme {
         Scaffold(
             bottomBar = {
@@ -31,14 +46,44 @@ fun ShoesScreen(modifier: Modifier = Modifier) {
             Box(
                 Modifier
                     .fillMaxSize()
-                    .padding(it)) {
-                Text(
-                    modifier = Modifier.align(Alignment.TopCenter),
-                    text = "Olá, Cleyton",
-                    fontSize = 14.sp,
-                    letterSpacing = 0.2.sp,
-                    color = MaterialTheme.colorScheme.onBackground
-                )
+                    .padding(it)
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
+                        focusManager.clearFocus()
+                    }
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Olá, Cleyton",
+                        fontSize = 14.sp,
+                        letterSpacing = 0.2.sp,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        SearchTextField(
+                            modifier = Modifier.weight(1f),
+                            textLabel = "Pesquisar",
+                            textPlaceholder = "O que você procura?",
+                            searchText = "",
+                            onSearchChange = { }
+                        )
+                        IconButtonCustom(icon = rememberVectorPainter(Icons.Default.Search))
+                    }
+
+                    CategoriesFilter(categorias = mockCategories)
+                }
             }
         }
     }
@@ -47,5 +92,7 @@ fun ShoesScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun ShoesScreenPreview() {
-    ShoesScreen()
+    ComposeShoesTheme {
+        ShoesScreen()
+    }
 }

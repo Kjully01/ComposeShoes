@@ -1,6 +1,7 @@
 package com.br.karen.composeshoes.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,6 +19,7 @@ import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 @Composable
 fun CategoriesFilter(modifier: Modifier = Modifier, categorias: List<String>) {
     LazyRow(
+        contentPadding = PaddingValues(horizontal = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(categorias) { categoria ->
@@ -29,7 +31,7 @@ fun CategoriesFilter(modifier: Modifier = Modifier, categorias: List<String>) {
                     selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
                     selectedContainerColor = MaterialTheme.colorScheme.primary,
 
-                ),
+                    ),
                 shape = RoundedCornerShape(12.dp)
             )
         }
