@@ -16,6 +16,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.br.karen.composeshoes.model.BottomAppBarItem
 import com.br.karen.composeshoes.model.mockBottomAppBarItems
+import com.br.karen.composeshoes.model.mockListProducts
 import com.br.karen.composeshoes.ui.components.BottomAppBar
 import com.br.karen.composeshoes.ui.intent.AppSideEffect
 import com.br.karen.composeshoes.ui.intent.AppUiIntent
@@ -66,6 +67,10 @@ fun AppScreen(
             }
     }
 
+    LaunchedEffect(Unit) {
+        onIntent(AppUiIntent.FetchProducts(""))
+    }
+
     Scaffold(
         bottomBar = {
             BottomAppBar(
@@ -82,7 +87,7 @@ fun AppScreen(
                 navController = navController,
                 startDestination = BottomAppBarItem.Home.destination,
             ) {
-                composable(BottomAppBarItem.Home.destination) { HomeScreen() }
+                composable(BottomAppBarItem.Home.destination) { HomeScreen(listProducts = uiState.listProducts) }
                 composable(BottomAppBarItem.ShoppingCart.destination) { ShoppingCartScreen() }
                 composable(BottomAppBarItem.Profile.destination) { ProfileScreen() }
             }
@@ -97,7 +102,7 @@ private fun AppScreenPreview() {
     ComposeShoesTheme {
         val sideEffectFlow = MutableSharedFlow<AppSideEffect>(replay = 0)
         AppScreen(
-            uiState = AppUiState(),
+            uiState = AppUiState(listProducts = mockListProducts),
             onIntent = {},
             sideEffectFlow = sideEffectFlow
         )

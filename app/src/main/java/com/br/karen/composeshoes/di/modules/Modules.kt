@@ -1,20 +1,24 @@
 package com.br.karen.composeshoes.di.modules
 
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import com.br.karen.composeshoes.dao.AppDao
 import com.br.karen.composeshoes.database.AppDatabase
 import com.br.karen.composeshoes.model.Product
+import com.br.karen.composeshoes.repository.AppRepository
 import com.br.karen.composeshoes.ui.viewmodel.AppViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.dsl.viewModelOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val viewModelModule = module {
     viewModelOf(::AppViewModel)
+}
+
+val repositoryModule = module {
+    singleOf(::AppRepository)
 }
 
 val databaseModule = module {

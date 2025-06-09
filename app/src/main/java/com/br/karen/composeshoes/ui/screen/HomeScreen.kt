@@ -10,11 +10,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +25,9 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.br.karen.composeshoes.model.Product
 import com.br.karen.composeshoes.model.mockCategories
+import com.br.karen.composeshoes.model.mockListProducts
 import com.br.karen.composeshoes.ui.components.CategoriesFilter
 import com.br.karen.composeshoes.ui.components.IconButtonCustom
 import com.br.karen.composeshoes.ui.components.ProductContainer
@@ -31,7 +35,10 @@ import com.br.karen.composeshoes.ui.components.SearchTextField
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    listProducts: List<Product>
+) {
     val focusManager = LocalFocusManager.current
 
     Box(
@@ -80,13 +87,12 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                     .padding(horizontal = 20.dp),
                 verticalArrangement = Arrangement.spacedBy(18.dp)
             ) {
-                items(3) {
+                items(listProducts) { item ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        ProductContainer()
-                        ProductContainer()
+                        ProductContainer(item = item)
                     }
                 }
             }
@@ -98,6 +104,8 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun HomeScreenPreview() {
     ComposeShoesTheme {
-        HomeScreen()
+        HomeScreen(
+            listProducts = mockListProducts
+        )
     }
 }

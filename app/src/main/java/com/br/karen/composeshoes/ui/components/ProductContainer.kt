@@ -18,10 +18,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.karen.composeshoes.R
+import com.br.karen.composeshoes.model.Product
+import com.br.karen.composeshoes.model.mockListProducts
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable
-fun ProductContainer(modifier: Modifier = Modifier) {
+fun ProductContainer(modifier: Modifier = Modifier, item: Product) {
 
     Column(
         modifier = modifier
@@ -38,13 +40,13 @@ fun ProductContainer(modifier: Modifier = Modifier) {
             contentDescription = ""
         )
         Text(
-            text = "Chuteira Nike Tiempo 10",
+            text = item.name,
             fontSize = 10.sp,
             letterSpacing = 0.2.sp,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Text(
-            text = "R$ 245,99",
+            text = "R$ ${item.price}",
             fontSize = 14.sp,
             letterSpacing = 0.2.sp,
             color = MaterialTheme.colorScheme.onBackground
@@ -56,6 +58,8 @@ fun ProductContainer(modifier: Modifier = Modifier) {
 @Composable
 private fun ProductContainerPreview() {
     ComposeShoesTheme {
-        ProductContainer()
+        ProductContainer(
+            item = mockListProducts[0]
+        )
     }
 }
