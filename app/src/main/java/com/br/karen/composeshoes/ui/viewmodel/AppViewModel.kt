@@ -28,6 +28,7 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         when (intent) {
             is AppUiIntent.OnTabSelected -> onTabSelected(tabSelected = intent.tabSelected)
             is AppUiIntent.FetchProducts -> fetchProducts(filter = intent.filter)
+            is AppUiIntent.SearchChange -> handleTextChange(newText = intent.newText)
         }
     }
 
@@ -56,6 +57,14 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
                 }
 
             }
+        }
+    }
+
+    private fun handleTextChange(newText: String) {
+        _uiState.update { currentUiState ->
+            currentUiState.copy(
+                searchText = newText
+            )
         }
     }
 }

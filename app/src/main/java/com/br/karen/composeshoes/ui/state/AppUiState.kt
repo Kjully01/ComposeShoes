@@ -5,5 +5,6 @@ import com.br.karen.composeshoes.model.Product
 
 data class AppUiState(
     val selectedItem: BottomAppBarItem = BottomAppBarItem.Home,
-    val listProducts: List<Product> = emptyList()
+    val listProducts: List<Product> = emptyList(),
+    val searchText: String = ""
 )

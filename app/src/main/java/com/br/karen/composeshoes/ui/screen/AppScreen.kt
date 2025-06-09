@@ -38,6 +38,8 @@ fun AppScreen(
     val backStackEntryState by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntryState?.destination
 
+    val searchText = uiState.searchText
+
     LaunchedEffect(currentDestination) {
         val item = mockBottomAppBarItems.find {
             it.destination == (currentDestination?.route ?: BottomAppBarItem.Home.destination)
@@ -87,7 +89,18 @@ fun AppScreen(
                 navController = navController,
                 startDestination = BottomAppBarItem.Home.destination,
             ) {
-                composable(BottomAppBarItem.Home.destination) { HomeScreen(listProducts = uiState.listProducts) }
+                composable(BottomAppBarItem.Home.destination) {
+                    HomeScreen(
+                        listProducts = uiState.listProducts,
+                        searchText = searchText,
+                        onSearchChange = { newText ->
+                            onIntent(AppUiIntent.SearchChange(newText))
+                        },
+                        onClickSearch = {
+                            onIntent(AppUiIntent.FetchProducts(filter = searchText))
+                        }
+                    )
+                }
                 composable(BottomAppBarItem.ShoppingCart.destination) { ShoppingCartScreen() }
                 composable(BottomAppBarItem.Profile.destination) { ProfileScreen() }
             }

@@ -26,7 +26,12 @@ import com.br.karen.composeshoes.R
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable
-fun IconButtonCustom(modifier: Modifier = Modifier, isOutline: Boolean = false, icon: Painter) {
+fun IconButtonCustom(
+    modifier: Modifier = Modifier,
+    isOutline: Boolean = false,
+    icon: Painter,
+    onClick: () -> Unit
+) {
     IconButton(
         modifier = Modifier
             .clip(RoundedCornerShape(16.dp))
@@ -39,7 +44,9 @@ fun IconButtonCustom(modifier: Modifier = Modifier, isOutline: Boolean = false, 
                 color = MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(16.dp)
             ),
-        onClick = {}
+        onClick = {
+            onClick()
+        }
     ) {
         Icon(
             painter = icon,
@@ -67,7 +74,7 @@ fun TextButtonCustom(modifier: Modifier = Modifier, text: String) {
 @Composable
 private fun IconButtonCustomPreview() {
     ComposeShoesTheme {
-        IconButtonCustom(icon = rememberVectorPainter(Icons.Default.Search))
+        IconButtonCustom(icon = rememberVectorPainter(Icons.Default.Search), onClick = {})
     }
 }
 
@@ -75,7 +82,10 @@ private fun IconButtonCustomPreview() {
 @Composable
 private fun IconButtonCustomOutlinePreview() {
     ComposeShoesTheme {
-        IconButtonCustom(isOutline = true, icon = painterResource(R.drawable.shopping_cart))
+        IconButtonCustom(
+            isOutline = true,
+            icon = painterResource(R.drawable.shopping_cart),
+            onClick = {})
     }
 }
 

@@ -32,12 +32,16 @@ import com.br.karen.composeshoes.ui.components.CategoriesFilter
 import com.br.karen.composeshoes.ui.components.IconButtonCustom
 import com.br.karen.composeshoes.ui.components.ProductContainer
 import com.br.karen.composeshoes.ui.components.SearchTextField
+import com.br.karen.composeshoes.ui.intent.AppUiIntent
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    listProducts: List<Product>
+    listProducts: List<Product>,
+    searchText: String = "",
+    onSearchChange: (String) -> Unit,
+    onClickSearch: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -73,10 +77,17 @@ fun HomeScreen(
                     modifier = Modifier.weight(1f),
                     textLabel = "Pesquisar",
                     textPlaceholder = "O que você procura?",
-                    searchText = "",
-                    onSearchChange = { }
+                    searchText = searchText,
+                    onSearchChange = { newText ->
+                        onSearchChange(newText)
+                    }
                 )
-                IconButtonCustom(icon = rememberVectorPainter(Icons.Default.Search))
+                IconButtonCustom(
+                    icon = rememberVectorPainter(Icons.Default.Search),
+                    onClick = {
+                        onClickSearch()
+                    }
+                )
             }
 
             CategoriesFilter(categorias = mockCategories)
@@ -105,7 +116,9 @@ fun HomeScreen(
 private fun HomeScreenPreview() {
     ComposeShoesTheme {
         HomeScreen(
-            listProducts = mockListProducts
+            listProducts = mockListProducts,
+            onSearchChange = {},
+            onClickSearch = {}
         )
     }
 }
