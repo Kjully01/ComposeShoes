@@ -5,9 +5,12 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -104,13 +107,31 @@ fun HomeScreen(
                         .padding(horizontal = 20.dp),
                     verticalArrangement = Arrangement.spacedBy(18.dp)
                 ) {
-                    items(listProducts) { item ->
+                    //.chunked(2) divide a lista em sublistas.
+                    items(listProducts.chunked(2)) { rowItems ->
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
+                            horizontalArrangement = Arrangement.spacedBy(18.dp)
                         ) {
-                            ProductContainer(item = item)
+                            ProductContainer(
+                                item = rowItems[0],
+                                modifier = Modifier.weight(1f)
+                            )
+                            if (rowItems.size > 1) {
+                                ProductContainer(
+                                    item = rowItems[1],
+                                    modifier = Modifier.weight(1f)
+                                )
+                            } else {
+                                // Container vazio visualmente quando a lista for ímpar
+                                Box(
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(IntrinsicSize.Min)
+                                ) {  }
+                            }
                         }
+
                     }
                 }
             } else {
