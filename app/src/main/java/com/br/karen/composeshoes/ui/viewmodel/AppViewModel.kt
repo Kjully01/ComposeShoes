@@ -28,7 +28,7 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         when (intent) {
             is AppUiIntent.OnTabSelected -> onTabSelected(tabSelected = intent.tabSelected)
             is AppUiIntent.OnFilterSelected -> onFilterSelected(filterSelected = intent.filterSelected)
-            is AppUiIntent.FetchProducts -> fetchProducts(filter = intent.filter)
+            is AppUiIntent.FetchProducts -> fetchProducts(filter = intent.filter, category = intent.category)
             is AppUiIntent.SearchChange -> handleTextChange(newText = intent.newText)
         }
     }
@@ -50,10 +50,12 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         }
     }
 
-    private fun fetchProducts(filter: String) {
+    private fun fetchProducts(filter: String, category: String) {
         viewModelScope.launch {
             CoroutineScope(Dispatchers.IO).launch {
-                val products = if (filter.isBlank()) {
+                val products = if (category != "Todos"){
+                    emptyList()
+                } else if(filter.isBlank()) {
                     repository.getAllProducts()
                 } else {
                     repository.getProducts(filter)

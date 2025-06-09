@@ -97,20 +97,34 @@ fun HomeScreen(
                     onCategoryChange(newCategory)
                 }
             )
-
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 20.dp),
-                verticalArrangement = Arrangement.spacedBy(18.dp)
-            ) {
-                items(listProducts) { item ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        ProductContainer(item = item)
+            if (listProducts.isNotEmpty()) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 20.dp),
+                    verticalArrangement = Arrangement.spacedBy(18.dp)
+                ) {
+                    items(listProducts) { item ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            ProductContainer(item = item)
+                        }
                     }
+                }
+            } else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Nada para exibir em $selectedCategory",
+                        fontSize = 20.sp,
+                        letterSpacing = 0.2.sp
+                    )
                 }
             }
         }
@@ -123,6 +137,20 @@ private fun HomeScreenPreview() {
     ComposeShoesTheme {
         HomeScreen(
             listProducts = mockListProducts,
+            onSearchChange = {},
+            onClickSearch = {},
+            selectedCategory = mockCategories[0],
+            onCategoryChange = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun HomeScreenListEmptyPreview() {
+    ComposeShoesTheme {
+        HomeScreen(
+            listProducts = emptyList(),
             onSearchChange = {},
             onClickSearch = {},
             selectedCategory = mockCategories[0],
