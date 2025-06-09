@@ -44,7 +44,7 @@ fun AppScreen(
         val item = mockBottomAppBarItems.find {
             it.destination == (currentDestination?.route ?: BottomAppBarItem.Home.destination)
         }
-        if (item != null && item != uiState.selectedItem) {
+        if (item != null && item != uiState.selectedItemBottomBar) {
             onIntent(AppUiIntent.OnTabSelected(item))
         }
     }
@@ -77,7 +77,7 @@ fun AppScreen(
         bottomBar = {
             BottomAppBar(
                 items = mockBottomAppBarItems,
-                item = uiState.selectedItem,
+                item = uiState.selectedItemBottomBar,
                 onItemChange = { selectedItem ->
                     onIntent(AppUiIntent.OnTabSelected(selectedItem))
                 }
@@ -98,6 +98,10 @@ fun AppScreen(
                         },
                         onClickSearch = {
                             onIntent(AppUiIntent.FetchProducts(filter = searchText))
+                        },
+                        selectedCategory = uiState.selectedItemFilter,
+                        onCategoryChange = { selectedItem ->
+                            onIntent(AppUiIntent.OnFilterSelected(selectedItem))
                         }
                     )
                 }

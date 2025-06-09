@@ -16,7 +16,6 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,7 +31,6 @@ import com.br.karen.composeshoes.ui.components.CategoriesFilter
 import com.br.karen.composeshoes.ui.components.IconButtonCustom
 import com.br.karen.composeshoes.ui.components.ProductContainer
 import com.br.karen.composeshoes.ui.components.SearchTextField
-import com.br.karen.composeshoes.ui.intent.AppUiIntent
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable
@@ -41,7 +39,9 @@ fun HomeScreen(
     listProducts: List<Product>,
     searchText: String = "",
     onSearchChange: (String) -> Unit,
-    onClickSearch: () -> Unit
+    onClickSearch: () -> Unit,
+    selectedCategory: String,
+    onCategoryChange: (String) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -90,7 +90,13 @@ fun HomeScreen(
                 )
             }
 
-            CategoriesFilter(categorias = mockCategories)
+            CategoriesFilter(
+                categories = mockCategories,
+                selectedCategory = selectedCategory,
+                onCategoryChange = { newCategory ->
+                    onCategoryChange(newCategory)
+                }
+            )
 
             LazyColumn(
                 modifier = Modifier
@@ -118,7 +124,9 @@ private fun HomeScreenPreview() {
         HomeScreen(
             listProducts = mockListProducts,
             onSearchChange = {},
-            onClickSearch = {}
+            onClickSearch = {},
+            selectedCategory = mockCategories[0],
+            onCategoryChange = {}
         )
     }
 }

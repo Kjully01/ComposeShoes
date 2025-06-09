@@ -17,16 +17,23 @@ import com.br.karen.composeshoes.model.mockCategories
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable
-fun CategoriesFilter(modifier: Modifier = Modifier, categorias: List<String>) {
+fun CategoriesFilter(
+    modifier: Modifier = Modifier,
+    categories: List<String>,
+    selectedCategory: String,
+    onCategoryChange: (String) -> Unit
+) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(categorias) { categoria ->
+        items(categories) { category ->
             FilterChip(
-                selected = categoria == categorias[0],
-                onClick = { },
-                label = { Text(categoria) },
+                selected = category == selectedCategory,
+                onClick = {
+                    onCategoryChange(category)
+                },
+                label = { Text(category) },
                 colors = FilterChipDefaults.filterChipColors(
                     selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
                     selectedContainerColor = MaterialTheme.colorScheme.primary,
@@ -42,6 +49,9 @@ fun CategoriesFilter(modifier: Modifier = Modifier, categorias: List<String>) {
 @Composable
 private fun CategoriesFilterPreview() {
     ComposeShoesTheme {
-        CategoriesFilter(categorias = mockCategories)
+        CategoriesFilter(
+            categories = mockCategories,
+            selectedCategory = mockCategories[0],
+            onCategoryChange = {})
     }
 }

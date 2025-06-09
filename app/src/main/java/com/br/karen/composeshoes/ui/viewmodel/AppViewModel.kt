@@ -27,6 +27,7 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
     fun onIntent(intent: AppUiIntent) {
         when (intent) {
             is AppUiIntent.OnTabSelected -> onTabSelected(tabSelected = intent.tabSelected)
+            is AppUiIntent.OnFilterSelected -> onFilterSelected(filterSelected = intent.filterSelected)
             is AppUiIntent.FetchProducts -> fetchProducts(filter = intent.filter)
             is AppUiIntent.SearchChange -> handleTextChange(newText = intent.newText)
         }
@@ -35,9 +36,17 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
     private fun onTabSelected(tabSelected: BottomAppBarItem) {
         viewModelScope.launch {
             _uiState.update { currentUiState ->
-                currentUiState.copy(selectedItem = tabSelected)
+                currentUiState.copy(selectedItemBottomBar = tabSelected)
             }
             _sideEffect.emit(AppSideEffect.Navigate(tabSelected.destination))
+        }
+    }
+
+    private fun onFilterSelected(filterSelected: String) {
+        viewModelScope.launch {
+            _uiState.update { currentUiState ->
+                currentUiState.copy(selectedItemFilter = filterSelected)
+            }
         }
     }
 
