@@ -3,6 +3,7 @@ package com.br.karen.composeshoes.di.modules
 import androidx.room.Room
 import com.br.karen.composeshoes.dao.AppDao
 import com.br.karen.composeshoes.database.AppDatabase
+import com.br.karen.composeshoes.database.Migrations.MIGRATION_1_2
 import com.br.karen.composeshoes.model.Product
 import com.br.karen.composeshoes.repository.AppRepository
 import com.br.karen.composeshoes.ui.viewmodel.AppViewModel
@@ -29,6 +30,7 @@ val databaseModule = module {
             "app_database"
         )
             .fallbackToDestructiveMigration(true)
+            .addMigrations(MIGRATION_1_2)
             .build()
     }
 

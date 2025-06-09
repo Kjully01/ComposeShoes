@@ -15,7 +15,7 @@ interface AppDao {
     @Query("SELECT * FROM tbProduct")
     suspend fun getAllProducts(): List<Product>
 
-    @Query("SELECT * FROM tbProduct WHERE name LIKE '%' || :filter || '%'")
-    suspend fun getProducts(filter: String) : List<Product>
+    @Query("SELECT * FROM tbProduct WHERE name LIKE '%' || :filter || '%' AND (:category = 'Todos' OR category = :category) ")
+    suspend fun getProducts(filter: String, category: String): List<Product>
 
 }

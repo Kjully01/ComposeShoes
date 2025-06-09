@@ -53,12 +53,10 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
     private fun fetchProducts(filter: String, category: String) {
         viewModelScope.launch {
             CoroutineScope(Dispatchers.IO).launch {
-                val products = if (category != "Todos"){
-                    emptyList()
-                } else if(filter.isBlank()) {
+                val products = if(filter.isBlank() && category == "Todos") {
                     repository.getAllProducts()
                 } else {
-                    repository.getProducts(filter)
+                    repository.getProducts(filter, category)
                 }
 
                 _uiState.update { currentUiState ->

@@ -9,8 +9,8 @@ class AppRepository(private val dao: AppDao) {
         return dao.getAllProducts()
     }
 
-    suspend fun getProducts(filter: String): List<Product> {
-        return dao.getProducts(filter)
+    suspend fun getProducts(filter: String, category: String): List<Product> {
+        return dao.getProducts(filter, category)
     }
 
 }
