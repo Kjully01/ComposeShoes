@@ -24,7 +24,8 @@ class MainActivity : ComponentActivity() {
 
                 AppScreen(
                     uiState = uiState,
-                    onIntent = viewModel::onIntent
+                    onIntent = viewModel::onIntent,
+                    sideEffectFlow = viewModel.sideEffect
                 )
             }
         }

@@ -8,6 +8,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -15,15 +17,19 @@ import androidx.navigation.compose.rememberNavController
 import com.br.karen.composeshoes.model.BottomAppBarItem
 import com.br.karen.composeshoes.model.mockBottomAppBarItems
 import com.br.karen.composeshoes.ui.components.BottomAppBar
+import com.br.karen.composeshoes.ui.intent.AppSideEffect
 import com.br.karen.composeshoes.ui.intent.AppUiIntent
 import com.br.karen.composeshoes.ui.state.AppUiState
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 
 @Composable
 fun AppScreen(
     modifier: Modifier = Modifier,
     uiState: AppUiState,
-    onIntent: (AppUiIntent) -> Unit
+    onIntent: (AppUiIntent) -> Unit,
+    sideEffectFlow: SharedFlow<AppSideEffect>
 ) {
 
     val navController = rememberNavController()
@@ -40,14 +46,24 @@ fun AppScreen(
         }
     }
 
-    LaunchedEffect(uiState.selectedItem) {
-        navController.navigate(uiState.selectedItem.destination) {
-            popUpTo(navController.graph.startDestinationId) {
-                saveState = true
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    LaunchedEffect(Unit) {
+        sideEffectFlow
+            .flowWithLifecycle(lifecycleOwner.lifecycle)
+            .collect { effect ->
+                when (effect) {
+                    is AppSideEffect.Navigate -> {
+                        navController.navigate(effect.route) {
+                            popUpTo(navController.graph.startDestinationId) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    }
+                }
             }
-            launchSingleTop = true
-            restoreState = true
-        }
     }
 
     Scaffold(
@@ -79,9 +95,11 @@ fun AppScreen(
 @Composable
 private fun AppScreenPreview() {
     ComposeShoesTheme {
+        val sideEffectFlow = MutableSharedFlow<AppSideEffect>(replay = 0)
         AppScreen(
             uiState = AppUiState(),
-            onIntent = {}
+            onIntent = {},
+            sideEffectFlow = sideEffectFlow
         )
     }
 }
