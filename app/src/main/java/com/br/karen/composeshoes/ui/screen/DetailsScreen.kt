@@ -71,8 +71,8 @@ fun DetailsScreen(
                 ) {
                     Text(
                         text = item.name,
-                        fontSize = 16.sp,
-                        letterSpacing = 0.2.sp
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                     Icon(
                         painter = painterResource(R.drawable.heart),
@@ -100,20 +100,20 @@ fun DetailsScreen(
                     Text(
                         modifier = Modifier.align(Alignment.Top),
                         text = "(10)",
-                        fontSize = 10.sp,
-                        letterSpacing = 0.2.sp
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
             Text(
                 text = item.description,
-                fontSize = 12.sp,
-                letterSpacing = 0.2.sp
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface
             )
             Text(
                 text = "R$ ${item.price}",
-                fontSize = 16.sp,
-                letterSpacing = 0.2.sp
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
 

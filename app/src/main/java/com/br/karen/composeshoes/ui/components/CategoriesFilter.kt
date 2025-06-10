@@ -34,12 +34,17 @@ fun CategoriesFilter(
                 onClick = {
                     onCategoryChange(category)
                 },
-                label = { Text(category.titulo) },
+                label = {
+                    Text(
+                        text = category.titulo,
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                },
                 colors = FilterChipDefaults.filterChipColors(
                     selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
                     selectedContainerColor = MaterialTheme.colorScheme.primary,
-
-                    ),
+                    labelColor = MaterialTheme.colorScheme.onSurfaceVariant
+                ),
                 shape = RoundedCornerShape(12.dp)
             )
         }

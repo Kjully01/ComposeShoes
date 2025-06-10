@@ -65,8 +65,8 @@ fun TextButtonCustom(modifier: Modifier = Modifier, text: String) {
     ) {
         Text(
             text = text,
-            fontSize = 18.sp,
-            letterSpacing = 0.2.sp
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

@@ -38,7 +38,12 @@ fun BottomAppBar(
                         contentDescription = "label_$label"
                     )
                 },
-                label = { Text(text = label) },
+                label = {
+                    Text(
+                        text = label,
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                },
                 selected = item.label == label,
                 onClick = {
                     onItemChange(it)

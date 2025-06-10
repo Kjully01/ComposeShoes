@@ -54,14 +54,12 @@ fun ProductContainer(
         )
         Text(
             text = item.name,
-            fontSize = 10.sp,
-            letterSpacing = 0.2.sp,
+            style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Text(
             text = "R$ ${item.price}",
-            fontSize = 14.sp,
-            letterSpacing = 0.2.sp,
+            style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.onBackground
         )
     }

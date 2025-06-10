@@ -64,8 +64,7 @@ fun HomeScreen(
         ) {
             Text(
                 text = "Olá, Cleyton",
-                fontSize = 14.sp,
-                letterSpacing = 0.2.sp,
+                style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.onBackground
             )
 
@@ -145,8 +144,8 @@ fun HomeScreen(
                 ) {
                     Text(
                         text = "Nada para exibir em ${selectedCategory.titulo}",
-                        fontSize = 20.sp,
-                        letterSpacing = 0.2.sp
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 }
             }
