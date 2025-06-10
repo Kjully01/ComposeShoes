@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.SharedFlow
 
 @Composable
 fun AppScreen(
-    modifier: Modifier = Modifier,
     uiState: AppUiState,
     productUiState: ProductUiState,
     onIntent: (AppUiIntent) -> Unit,

@@ -25,6 +25,7 @@ fun BottomAppBar(
     onItemChange: (BottomAppBarItem) -> Unit
 ) {
     NavigationBar(
+        modifier = modifier,
         containerColor = MaterialTheme.colorScheme.background
     ) {
         items.forEach {

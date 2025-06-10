@@ -50,7 +50,7 @@ fun HomeScreen(
     val focusManager = LocalFocusManager.current
 
     Box(
-        Modifier
+        modifier = modifier
             .fillMaxSize()
             .clickable(
                 indication = null,
