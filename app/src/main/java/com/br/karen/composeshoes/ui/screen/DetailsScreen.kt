@@ -26,7 +26,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.br.karen.composeshoes.R
 import com.br.karen.composeshoes.model.Product
 import com.br.karen.composeshoes.model.mockListProducts
@@ -39,7 +38,8 @@ fun DetailsScreen(
     modifier: Modifier = Modifier,
     idProduct: Int,
     item: Product,
-    loadProduct: (Int) -> Unit
+    loadProduct: (Int) -> Unit,
+    onClick: () -> Unit
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
     val scrollState = rememberScrollState()
@@ -129,15 +129,19 @@ fun DetailsScreen(
         ) {
             TextButtonCustom(
                 modifier = Modifier.weight(0.85f),
-                text = "Adicionar no carrinho"
+                text = "Adicionar no carrinho",
+                onClick = {
+                    onClick()
+                }
             )
             IconButtonCustom(
                 modifier = Modifier.weight(0.15f),
                 isOutline = true,
-                icon = painterResource(R.drawable.shopping_cart)
-            ) {
-
-            }
+                icon = painterResource(R.drawable.shopping_cart),
+                onClick = {
+                    onClick()
+                }
+            )
         }
     }
 }
@@ -149,7 +153,8 @@ private fun DetailsScreenPreview() {
         DetailsScreen(
             idProduct = mockListProducts[1].id,
             loadProduct = {},
-            item = mockListProducts[1]
+            item = mockListProducts[1],
+            onClick = {}
         )
     }
 }

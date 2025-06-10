@@ -2,6 +2,7 @@ package com.br.karen.composeshoes.ui.intent
 
 import com.br.karen.composeshoes.model.BottomAppBarItem
 import com.br.karen.composeshoes.model.EnumCategory
+import com.br.karen.composeshoes.navigation.AppDestination
 
 sealed class AppUiIntent {
     data class OnTabSelected(val tabSelected: BottomAppBarItem) : AppUiIntent()
@@ -11,4 +12,5 @@ sealed class AppUiIntent {
     data class OnProductClicked(val productId: Int) : AppUiIntent()
     data class OnLoadProduct(val productId: Int) : AppUiIntent()
     data class OnRouteChanged(val route: String) : AppUiIntent()
+    data class NavigateTo(val destination: AppDestination) : AppUiIntent()
 }

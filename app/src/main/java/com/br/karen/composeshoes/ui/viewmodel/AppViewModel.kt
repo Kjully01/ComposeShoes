@@ -44,6 +44,7 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
             is AppUiIntent.OnProductClicked -> onProductClicked(id = intent.productId)
             is AppUiIntent.OnLoadProduct -> onLoadProduct(id = intent.productId)
             is AppUiIntent.OnRouteChanged -> onRouteChanged(intent.route)
+            is AppUiIntent.NavigateTo -> navigateTo(destination = intent.destination)
         }
     }
 
@@ -55,7 +56,8 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
                     isShowBottomAppBar = true
                 )
             }
-            _sideEffect.emit(AppSideEffect.Navigate(route = tabSelected.destination))
+
+            navigateTo(tabSelected.destination)
         }
     }
 
@@ -103,7 +105,7 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
             }
 
             val destination = AppDestination.ProductDetail(id.toString())
-            _sideEffect.emit(AppSideEffect.Navigate(destination))
+            navigateTo(destination)
         }
     }
 
@@ -128,6 +130,12 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
 
         _uiState.update { currentUiState ->
             currentUiState.copy(isShowBottomAppBar = shouldShowBottomAppBar)
+        }
+    }
+
+    private fun navigateTo(destination: AppDestination) {
+        viewModelScope.launch {
+            _sideEffect.emit(AppSideEffect.Navigate(destination))
         }
     }
 }

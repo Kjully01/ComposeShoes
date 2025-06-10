@@ -25,7 +25,6 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.br.karen.composeshoes.model.EnumCategory
 import com.br.karen.composeshoes.model.Product
 import com.br.karen.composeshoes.model.mockListProducts

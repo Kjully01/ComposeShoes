@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.br.karen.composeshoes.R
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
@@ -57,10 +56,14 @@ fun IconButtonCustom(
 }
 
 @Composable
-fun TextButtonCustom(modifier: Modifier = Modifier, text: String) {
+fun TextButtonCustom(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit,
+) {
     Button(
         modifier = modifier.height(53.dp),
-        onClick = {},
+        onClick = { onClick() },
         shape = RoundedCornerShape(16.dp),
     ) {
         Text(
@@ -75,7 +78,10 @@ fun TextButtonCustom(modifier: Modifier = Modifier, text: String) {
 @Composable
 private fun IconButtonCustomPreview() {
     ComposeShoesTheme {
-        IconButtonCustom(icon = rememberVectorPainter(Icons.Default.Search), onClick = {})
+        IconButtonCustom(
+            icon = rememberVectorPainter(Icons.Default.Search),
+            onClick = {}
+        )
     }
 }
 
@@ -86,7 +92,8 @@ private fun IconButtonCustomOutlinePreview() {
         IconButtonCustom(
             isOutline = true,
             icon = painterResource(R.drawable.shopping_cart),
-            onClick = {})
+            onClick = {}
+        )
     }
 }
 
@@ -94,6 +101,9 @@ private fun IconButtonCustomOutlinePreview() {
 @Composable
 private fun TextButtonCustomPreview() {
     ComposeShoesTheme {
-        TextButtonCustom(text = "Adicionar no Carrinho")
+        TextButtonCustom(
+            text = "Adicionar no Carrinho",
+            onClick = {}
+        )
     }
 }

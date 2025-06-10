@@ -18,7 +18,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.br.karen.composeshoes.R
 import com.br.karen.composeshoes.model.Product
 import com.br.karen.composeshoes.model.mockListProducts

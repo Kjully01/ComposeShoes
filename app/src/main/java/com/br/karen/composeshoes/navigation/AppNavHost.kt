@@ -68,7 +68,10 @@ fun AppNavHost(
             DetailsScreen(
                 idProduct = productId,
                 loadProduct = { id -> onIntent(AppUiIntent.OnLoadProduct(id)) },
-                item = productUiState.product
+                item = productUiState.product,
+                onClick = {
+                    onIntent(AppUiIntent.NavigateTo(AppDestination.ShoppingCart))
+                }
             )
         }
     }
