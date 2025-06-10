@@ -10,4 +10,5 @@ sealed class AppUiIntent {
     data class SearchChange(val newText: String) : AppUiIntent()
     data class OnProductClicked(val productId: Int) : AppUiIntent()
     data class OnLoadProduct(val productId: Int) : AppUiIntent()
+    data class OnRouteChanged(val route: String) : AppUiIntent()
 }

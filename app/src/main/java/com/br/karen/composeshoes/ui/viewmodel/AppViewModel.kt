@@ -42,13 +42,17 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
             is AppUiIntent.SearchChange -> handleTextChange(newText = intent.newText)
             is AppUiIntent.OnProductClicked -> onProductClicked(id = intent.productId)
             is AppUiIntent.OnLoadProduct -> onLoadProduct(id = intent.productId)
+            is AppUiIntent.OnRouteChanged -> onRouteChanged(intent.route)
         }
     }
 
     private fun onTabSelected(tabSelected: BottomAppBarItem) {
         viewModelScope.launch {
             _uiState.update { currentUiState ->
-                currentUiState.copy(selectedItemBottomBar = tabSelected)
+                currentUiState.copy(
+                    selectedItemBottomBar = tabSelected,
+                    isShowBottomAppBar = true
+                )
             }
             _sideEffect.emit(AppSideEffect.Navigate(route = tabSelected.destination))
         }
@@ -93,6 +97,10 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
 
     private fun onProductClicked(id: Int) {
         viewModelScope.launch {
+            _uiState.update { currentUiState ->
+                currentUiState.copy(isShowBottomAppBar = false)
+            }
+
             val destination = AppDestination.ProductDetail(id.toString())
             _sideEffect.emit(AppSideEffect.Navigate(destination))
         }
@@ -111,6 +119,14 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
                     }
                 }
             }
+        }
+    }
+
+    private fun onRouteChanged(route: String) {
+        val shouldShowBottomAppBar = if (route == "productDetail/{productId}") false else true
+
+        _uiState.update { currentUiState ->
+            currentUiState.copy(isShowBottomAppBar = shouldShowBottomAppBar)
         }
     }
 }

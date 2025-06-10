@@ -46,6 +46,9 @@ fun AppScreen(
         if (item != null && item != uiState.selectedItemBottomBar) {
             onIntent(AppUiIntent.OnTabSelected(item))
         }
+        currentDestination?.let {
+            onIntent(AppUiIntent.OnRouteChanged(it))
+        }
     }
 
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -74,13 +77,15 @@ fun AppScreen(
 
     Scaffold(
         bottomBar = {
-            BottomAppBar(
-                items = bottomNavItems,
-                item = uiState.selectedItemBottomBar,
-                onItemChange = { selectedItem ->
-                    onIntent(AppUiIntent.OnTabSelected(selectedItem))
-                }
-            )
+            if (uiState.isShowBottomAppBar) {
+                BottomAppBar(
+                    items = bottomNavItems,
+                    item = uiState.selectedItemBottomBar,
+                    onItemChange = { selectedItem ->
+                        onIntent(AppUiIntent.OnTabSelected(selectedItem))
+                    }
+                )
+            }
         }
     ) { paddingValues ->
         Box(modifier = Modifier.padding(paddingValues)) {

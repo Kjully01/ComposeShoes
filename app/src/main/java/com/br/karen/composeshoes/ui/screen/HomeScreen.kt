@@ -117,13 +117,13 @@ fun HomeScreen(
                             ProductContainer(
                                 item = rowItems[0],
                                 modifier = Modifier.weight(1f),
-                                onClick = {}
+                                onClick = { onClickProduct(rowItems[0].id) }
                             )
                             if (rowItems.size > 1) {
                                 ProductContainer(
                                     item = rowItems[1],
                                     modifier = Modifier.weight(1f),
-                                    onClick = {}
+                                    onClick = { onClickProduct(rowItems[1].id) }
                                 )
                             } else {
                                 // Container vazio visualmente quando a lista for ímpar

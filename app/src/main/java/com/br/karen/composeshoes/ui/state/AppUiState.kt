@@ -9,5 +9,6 @@ data class AppUiState(
     val selectedItemBottomBar: BottomAppBarItem = bottomNavItems.first(),
     val listProducts: List<Product> = emptyList(),
     val searchText: String = "",
-    val selectedItemFilter: String = mockCategories[0]
+    val selectedItemFilter: String = mockCategories[0],
+    val isShowBottomAppBar: Boolean = true
 )
