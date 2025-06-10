@@ -1,7 +1,6 @@
 package com.br.karen.composeshoes.ui.theme
 
 import androidx.compose.material3.Typography
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -10,11 +9,11 @@ import androidx.compose.ui.unit.sp
 import com.br.karen.composeshoes.R
 
 val PoppinsFontFamily = FontFamily(
-    Font(R.font.poppins),
-    Font(R.font.poppins_light),
-    Font(R.font.poppins_medium),
-    Font(R.font.poppins_semibold),
-    Font(R.font.poppins_bold)
+    Font(R.font.poppins, weight = FontWeight.Normal),
+    Font(R.font.poppins_light, weight = FontWeight.Light),
+    Font(R.font.poppins_medium, weight = FontWeight.Medium),
+    Font(R.font.poppins_semibold, weight = FontWeight.SemiBold),
+    Font(R.font.poppins_bold, weight = FontWeight.Bold)
 )
 
 val AppTypography = Typography(

@@ -5,8 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
@@ -47,16 +49,19 @@ fun ProductContainer(
         Image(
             modifier = Modifier
                 .height(180.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(16.dp)),
             contentScale = ContentScale.Crop,
             painter = painterResource(R.drawable.image_tenis_teste),
             contentDescription = ""
         )
+        Spacer(modifier = Modifier.size(16.dp))
         Text(
             text = item.name,
             style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+        Spacer(modifier = Modifier.size(4.dp))
         Text(
             text = "R$ ${item.price}",
             style = MaterialTheme.typography.headlineLarge,
