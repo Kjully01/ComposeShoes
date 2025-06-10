@@ -59,36 +59,43 @@ fun HomeScreen(
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(34.dp)
         ) {
-            Text(
-                text = "Olá, Cleyton",
-                style = MaterialTheme.typography.headlineLarge,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            Column(
+                Modifier.padding(top = 34.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
-                SearchTextField(
-                    modifier = Modifier.weight(0.85f),
-                    textPlaceholder = "Pesquisar",
-                    searchText = searchText,
-                    onSearchChange = { newText ->
-                        onSearchChange(newText)
-                    }
+                Text(
+                    text = "Olá, Cleyton",
+                    style = MaterialTheme.typography.headlineLarge,
+                    color = MaterialTheme.colorScheme.onBackground
                 )
-                IconButtonCustom(
-                    modifier = Modifier.weight(0.15f),
-                    icon = rememberVectorPainter(Icons.Default.Search),
-                    onClick = {
-                        onClickSearch()
-                    }
-                )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    SearchTextField(
+                        modifier = Modifier.weight(0.85f),
+                        textPlaceholder = "Pesquisar",
+                        searchText = searchText,
+                        onSearchChange = { newText ->
+                            onSearchChange(newText)
+                        }
+                    )
+                    IconButtonCustom(
+                        modifier = Modifier.weight(0.15f),
+                        icon = rememberVectorPainter(Icons.Default.Search),
+                        onClick = {
+                            onClickSearch()
+                        }
+                    )
+                }
             }
 
             CategoriesFilter(
