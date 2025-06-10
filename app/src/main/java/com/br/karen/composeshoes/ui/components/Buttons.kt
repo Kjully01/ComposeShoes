@@ -2,12 +2,12 @@ package com.br.karen.composeshoes.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -33,12 +33,12 @@ fun IconButtonCustom(
     onClick: () -> Unit
 ) {
     IconButton(
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(16.dp))
             .background(
                 if (isOutline) Color.Unspecified else MaterialTheme.colorScheme.primary
             )
-            .size(50.dp)
+            .size(53.dp)
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.primary,
@@ -59,6 +59,7 @@ fun IconButtonCustom(
 @Composable
 fun TextButtonCustom(modifier: Modifier = Modifier, text: String) {
     Button(
+        modifier = modifier.height(53.dp),
         onClick = {},
         shape = RoundedCornerShape(16.dp),
     ) {
