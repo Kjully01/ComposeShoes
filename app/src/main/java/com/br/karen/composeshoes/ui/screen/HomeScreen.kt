@@ -78,15 +78,15 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 SearchTextField(
-                    modifier = Modifier.weight(1f),
-                    textLabel = "Pesquisar",
-                    textPlaceholder = "O que você procura?",
+                    modifier = Modifier.weight(0.85f),
+                    textPlaceholder = "Pesquisar",
                     searchText = searchText,
                     onSearchChange = { newText ->
                         onSearchChange(newText)
                     }
                 )
                 IconButtonCustom(
+                    modifier = Modifier.weight(0.15f),
                     icon = rememberVectorPainter(Icons.Default.Search),
                     onClick = {
                         onClickSearch()

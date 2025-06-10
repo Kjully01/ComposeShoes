@@ -12,10 +12,7 @@ import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 @Composable
 fun SearchTextField(
     modifier: Modifier = Modifier,
-    textLabel: String,
     textPlaceholder: String = "",
-    singleLine: Boolean = true,
-    maxLines: Int = 1,
     searchText: String,
     onSearchChange: (String) -> Unit
 ) {
@@ -26,9 +23,6 @@ fun SearchTextField(
             onSearchChange(it)
         },
         shape = RoundedCornerShape(16.dp),
-        label = { Text(text = textLabel) },
-        singleLine = singleLine,
-        maxLines = maxLines,
         placeholder = { Text(text = textPlaceholder) },
     )
 }
@@ -38,8 +32,7 @@ fun SearchTextField(
 private fun SearchTextFieldPreview() {
     ComposeShoesTheme {
         SearchTextField(
-            textLabel = "Pesquisar",
-            textPlaceholder = "O que você procura?",
+            textPlaceholder = "Pesquisar",
             searchText = "",
             onSearchChange = { }
         )
