@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.karen.composeshoes.model.BottomAppBarItem
-import com.br.karen.composeshoes.model.mockBottomAppBarItems
+import com.br.karen.composeshoes.model.bottomNavItems
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable
@@ -58,7 +58,7 @@ fun BottomAppBar(
 @Composable
 private fun BottomAppBarPreview() {
     ComposeShoesTheme {
-        BottomAppBar(items = mockBottomAppBarItems, item = mockBottomAppBarItems[0], onItemChange = {})
+        BottomAppBar(items = bottomNavItems, item = bottomNavItems[0], onItemChange = {})
     }
 
 }

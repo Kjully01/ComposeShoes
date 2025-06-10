@@ -2,27 +2,16 @@ package com.br.karen.composeshoes.model
 
 import androidx.annotation.DrawableRes
 import com.br.karen.composeshoes.R
+import com.br.karen.composeshoes.navigation.AppDestination
 
-open class BottomAppBarItem (
+data class BottomAppBarItem(
+    val destination: AppDestination,
     val label: String,
-    @DrawableRes val icon: Int,
-    val destination: String
-) {
-    object Home: BottomAppBarItem(
-        label = "Home",
-        icon = R.drawable.home,
-        destination = "home"
-    )
+    @DrawableRes val icon: Int
+)
 
-    object ShoppingCart: BottomAppBarItem(
-        label = "Carrinho",
-        icon = R.drawable.shopping_cart,
-        destination = "shopping"
-    )
-
-    object Profile: BottomAppBarItem(
-        label = "Perfil",
-        icon = R.drawable.user,
-        destination = "profile"
-    )
-}
+val bottomNavItems = listOf(
+    BottomAppBarItem(AppDestination.Home, "Home", R.drawable.home),
+    BottomAppBarItem(AppDestination.ShoppingCart, "Carrinho", R.drawable.shopping_cart),
+    BottomAppBarItem(AppDestination.Profile, "Perfil", R.drawable.user)
+)

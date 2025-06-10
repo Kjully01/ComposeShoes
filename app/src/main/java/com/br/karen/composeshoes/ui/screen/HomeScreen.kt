@@ -44,7 +44,8 @@ fun HomeScreen(
     onSearchChange: (String) -> Unit,
     onClickSearch: () -> Unit,
     selectedCategory: String,
-    onCategoryChange: (String) -> Unit
+    onCategoryChange: (String) -> Unit,
+    onClickProduct: (Int) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
 
@@ -115,12 +116,14 @@ fun HomeScreen(
                         ) {
                             ProductContainer(
                                 item = rowItems[0],
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier.weight(1f),
+                                onClick = {}
                             )
                             if (rowItems.size > 1) {
                                 ProductContainer(
                                     item = rowItems[1],
-                                    modifier = Modifier.weight(1f)
+                                    modifier = Modifier.weight(1f),
+                                    onClick = {}
                                 )
                             } else {
                                 // Container vazio visualmente quando a lista for ímpar
@@ -128,7 +131,7 @@ fun HomeScreen(
                                     modifier = Modifier
                                         .weight(1f)
                                         .height(IntrinsicSize.Min)
-                                ) {  }
+                                ) { }
                             }
                         }
 
@@ -161,7 +164,8 @@ private fun HomeScreenPreview() {
             onSearchChange = {},
             onClickSearch = {},
             selectedCategory = mockCategories[0],
-            onCategoryChange = {}
+            onCategoryChange = {},
+            onClickProduct = {}
         )
     }
 }
@@ -175,7 +179,8 @@ private fun HomeScreenListEmptyPreview() {
             onSearchChange = {},
             onClickSearch = {},
             selectedCategory = mockCategories[0],
-            onCategoryChange = {}
+            onCategoryChange = {},
+            onClickProduct = {}
         )
     }
 }

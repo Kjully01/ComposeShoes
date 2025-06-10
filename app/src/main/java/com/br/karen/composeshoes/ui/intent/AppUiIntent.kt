@@ -8,4 +8,6 @@ sealed class AppUiIntent {
     data class OnFilterSelected(val filterSelected: String) : AppUiIntent()
     data class FetchProducts(val filter: String = "", val category: String = mockCategories[0]) : AppUiIntent()
     data class SearchChange(val newText: String) : AppUiIntent()
+    data class OnProductClicked(val productId: Int) : AppUiIntent()
+    data class OnLoadProduct(val productId: Int) : AppUiIntent()
 }

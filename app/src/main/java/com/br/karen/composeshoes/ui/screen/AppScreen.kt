@@ -10,17 +10,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.flowWithLifecycle
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.br.karen.composeshoes.model.BottomAppBarItem
-import com.br.karen.composeshoes.model.mockBottomAppBarItems
+import com.br.karen.composeshoes.model.bottomNavItems
 import com.br.karen.composeshoes.model.mockListProducts
+import com.br.karen.composeshoes.navigation.AppDestination
+import com.br.karen.composeshoes.navigation.AppNavHost
 import com.br.karen.composeshoes.ui.components.BottomAppBar
 import com.br.karen.composeshoes.ui.intent.AppSideEffect
 import com.br.karen.composeshoes.ui.intent.AppUiIntent
 import com.br.karen.composeshoes.ui.state.AppUiState
+import com.br.karen.composeshoes.ui.state.ProductUiState
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -29,6 +29,7 @@ import kotlinx.coroutines.flow.SharedFlow
 fun AppScreen(
     modifier: Modifier = Modifier,
     uiState: AppUiState,
+    productUiState: ProductUiState,
     onIntent: (AppUiIntent) -> Unit,
     sideEffectFlow: SharedFlow<AppSideEffect>
 ) {
@@ -36,11 +37,11 @@ fun AppScreen(
     val navController = rememberNavController()
 
     val backStackEntryState by navController.currentBackStackEntryAsState()
-    val currentDestination = backStackEntryState?.destination
+    val currentDestination = backStackEntryState?.destination?.route
 
     LaunchedEffect(currentDestination) {
-        val item = mockBottomAppBarItems.find {
-            it.destination == (currentDestination?.route ?: BottomAppBarItem.Home.destination)
+        val item = bottomNavItems.find {
+            it.destination.route == (currentDestination ?: AppDestination.Home.route)
         }
         if (item != null && item != uiState.selectedItemBottomBar) {
             onIntent(AppUiIntent.OnTabSelected(item))
@@ -55,7 +56,7 @@ fun AppScreen(
             .collect { effect ->
                 when (effect) {
                     is AppSideEffect.Navigate -> {
-                        navController.navigate(effect.route) {
+                        navController.navigate(effect.route.route) {
                             popUpTo(navController.graph.startDestinationId) {
                                 saveState = true
                             }
@@ -74,53 +75,25 @@ fun AppScreen(
     Scaffold(
         bottomBar = {
             BottomAppBar(
-                items = mockBottomAppBarItems,
+                items = bottomNavItems,
                 item = uiState.selectedItemBottomBar,
                 onItemChange = { selectedItem ->
                     onIntent(AppUiIntent.OnTabSelected(selectedItem))
                 }
             )
         }
-    ) {
-        Box(modifier = Modifier.padding(it)) {
-            NavHost(
+    ) { paddingValues ->
+        Box(modifier = Modifier.padding(paddingValues)) {
+            AppNavHost(
                 navController = navController,
-                startDestination = BottomAppBarItem.Home.destination,
-            ) {
-                composable(BottomAppBarItem.Home.destination) {
-                    HomeScreen(
-                        listProducts = uiState.listProducts,
-                        searchText = uiState.searchText,
-                        onSearchChange = { newText ->
-                            onIntent(AppUiIntent.SearchChange(newText))
-                        },
-                        onClickSearch = {
-                            onIntent(
-                                AppUiIntent.FetchProducts(
-                                    filter = uiState.searchText,
-                                    category = uiState.selectedItemFilter
-                                )
-                            )
-                        },
-                        selectedCategory = uiState.selectedItemFilter,
-                        onCategoryChange = { selectedItem ->
-                            onIntent(AppUiIntent.OnFilterSelected(selectedItem))
-                            onIntent(
-                                AppUiIntent.FetchProducts(
-                                    filter = uiState.searchText,
-                                    category = selectedItem
-                                )
-                            )
-                        }
-                    )
-                }
-                composable(BottomAppBarItem.ShoppingCart.destination) { ShoppingCartScreen() }
-                composable(BottomAppBarItem.Profile.destination) { ProfileScreen() }
-            }
+                uiState = uiState,
+                productUiState = productUiState,
+                onIntent = onIntent
+            )
         }
     }
-
 }
+
 
 @Preview
 @Composable
@@ -129,6 +102,7 @@ private fun AppScreenPreview() {
         val sideEffectFlow = MutableSharedFlow<AppSideEffect>(replay = 0)
         AppScreen(
             uiState = AppUiState(listProducts = mockListProducts),
+            productUiState = ProductUiState(),
             onIntent = {},
             sideEffectFlow = sideEffectFlow
         )

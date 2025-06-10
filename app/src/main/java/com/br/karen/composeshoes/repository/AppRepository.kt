@@ -13,4 +13,7 @@ class AppRepository(private val dao: AppDao) {
         return dao.getProducts(filter, category)
     }
 
+    suspend fun getProduct(id: Int): Product {
+        return dao.getProduct(id)
+    }
 }

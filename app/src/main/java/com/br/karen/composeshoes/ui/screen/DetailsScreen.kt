@@ -15,6 +15,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,8 +33,17 @@ import com.br.karen.composeshoes.ui.components.TextButtonCustom
 import com.br.karen.composeshoes.ui.theme.ComposeShoesTheme
 
 @Composable
-fun DetailsScreen(modifier: Modifier = Modifier, item: Product) {
+fun DetailsScreen(
+    modifier: Modifier = Modifier,
+    idProduct: Int,
+    item: Product,
+    loadProduct: (Int) -> Unit
+) {
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
+
+    LaunchedEffect(Unit) {
+        loadProduct(idProduct)
+    }
 
     Column(
         modifier = modifier
@@ -132,6 +142,10 @@ fun DetailsScreen(modifier: Modifier = Modifier, item: Product) {
 @Composable
 private fun DetailsScreenPreview() {
     ComposeShoesTheme {
-        DetailsScreen(item = mockListProducts[1])
+        DetailsScreen(
+            idProduct = mockListProducts[1].id,
+            loadProduct = {},
+            item = mockListProducts[1]
+        )
     }
 }

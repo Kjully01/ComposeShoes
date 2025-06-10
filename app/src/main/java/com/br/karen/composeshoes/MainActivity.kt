@@ -21,9 +21,11 @@ class MainActivity : ComponentActivity() {
 
                 val viewModel = koinViewModel<AppViewModel>()
                 val uiState by viewModel.uiState.collectAsState()
+                val productUiState by viewModel.productUiState.collectAsState()
 
                 AppScreen(
                     uiState = uiState,
+                    productUiState = productUiState,
                     onIntent = viewModel::onIntent,
                     sideEffectFlow = viewModel.sideEffect
                 )
