@@ -1,9 +1,12 @@
 package com.br.karen.composeshoes.di.modules
 
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.room.Room
+import com.br.karen.composeshoes.R
 import com.br.karen.composeshoes.dao.AppDao
 import com.br.karen.composeshoes.database.AppDatabase
 import com.br.karen.composeshoes.database.Migrations.MIGRATION_1_2
+import com.br.karen.composeshoes.database.Migrations.MIGRATION_2_3
 import com.br.karen.composeshoes.model.Product
 import com.br.karen.composeshoes.repository.AppRepository
 import com.br.karen.composeshoes.ui.viewmodel.AppViewModel
@@ -31,6 +34,7 @@ val databaseModule = module {
         )
             .fallbackToDestructiveMigration(true)
             .addMigrations(MIGRATION_1_2)
+            .addMigrations(MIGRATION_2_3)
             .build()
     }
 
@@ -49,7 +53,8 @@ val databaseModule = module {
                                 " com estampa tátil e iconografia tradicional, detalhes foscos para um visual magnético" +
                                 " e um inovador sistema de unidade Dynamic Air, projetado para fazer com que caminhar pareça" +
                                 " deslizar no ar.",
-                        price = 245.99
+                        price = 245.99,
+                        image = R.drawable.image_tenis_1
                     )
                 )
                 dao.saveProduct(
@@ -60,7 +65,8 @@ val databaseModule = module {
                                 " com estampa tátil e iconografia tradicional, detalhes foscos para um visual magnético" +
                                 " e um inovador sistema de unidade Dynamic Air, projetado para fazer com que caminhar pareça" +
                                 " deslizar no ar.",
-                        price = 699.00
+                        price = 699.00,
+                        image = R.drawable.image_tenis_2
                     )
                 )
                 dao.saveProduct(
@@ -71,7 +77,8 @@ val databaseModule = module {
                                 " com estampa tátil e iconografia tradicional, detalhes foscos para um visual magnético" +
                                 " e um inovador sistema de unidade Dynamic Air, projetado para fazer com que caminhar pareça" +
                                 " deslizar no ar.",
-                        price = 920.00
+                        price = 920.00,
+                        image = R.drawable.image_tenis_3
                     )
                 )
                 dao.saveProduct(
@@ -82,10 +89,33 @@ val databaseModule = module {
                                 " com estampa tátil e iconografia tradicional, detalhes foscos para um visual magnético" +
                                 " e um inovador sistema de unidade Dynamic Air, projetado para fazer com que caminhar pareça" +
                                 " deslizar no ar.",
-                        price = 399.99
+                        price = 399.99,
+                        image = R.drawable.image_tenis_4
                     )
                 )
-
+                dao.saveProduct(
+                    Product(
+                        name = "Produto sem imagem",
+                        description = LoremIpsum(50).values.first(),
+                        price = 250.99
+                    )
+                )
+                dao.saveProduct(
+                    Product(
+                        name = "Produto com outra imagem",
+                        description = LoremIpsum(20).values.first(),
+                        price = 300.00,
+                        image = R.drawable.calcado_feminino
+                    )
+                )
+                dao.saveProduct(
+                    Product(
+                        name = "Produto Calçado teste",
+                        description = LoremIpsum(150).values.first(),
+                        price = 456.99,
+                        image = R.drawable.calcado_feminino_2
+                    )
+                )
             }
         }
     }

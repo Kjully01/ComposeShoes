@@ -21,7 +21,8 @@ private val DarkColorScheme = darkColorScheme(
     onSurface = LightGray,
     onSurfaceVariant = LightGray,
     inverseOnSurface = White,
-    outline = White
+    outline = White,
+    surfaceContainer = ExtraLightGray
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -34,7 +35,8 @@ private val LightColorScheme = lightColorScheme(
     onSurfaceVariant = Gray,
     inverseOnSurface = LightGray,
     surface = LightGray,
-    outline = ExtraLightGray
+    outline = ExtraLightGray,
+    surfaceContainer = ExtraLightGray
 )
 
 @Composable

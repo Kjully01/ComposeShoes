@@ -3,6 +3,7 @@ package com.br.karen.composeshoes.ui.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -54,14 +55,22 @@ fun DetailsScreen(
             .verticalScroll(scrollState)
             .background(MaterialTheme.colorScheme.background)
     ) {
-        Image(
-            modifier = Modifier
+        if(item.image != null) {
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(screenHeight / 2),
+                contentScale = ContentScale.Crop,
+                painter = painterResource(id = item.image),
+                contentDescription = "img_product"
+            )
+        } else {
+            Box( modifier = Modifier
                 .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.surfaceContainer)
                 .height(screenHeight / 2),
-            contentScale = ContentScale.Crop,
-            painter = painterResource(R.drawable.image_tenis_teste_2),
-            contentDescription = "img_product"
-        )
+            )
+        }
         Column(
             modifier = Modifier.padding(horizontal = 20.dp, vertical = 24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
