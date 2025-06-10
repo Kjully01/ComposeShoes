@@ -1,13 +1,5 @@
 package com.br.karen.composeshoes.model
 
-val mockCategories = listOf(
-    "Todos",
-    "Tênis",
-    "Botas",
-    "Chuteiras",
-    "Sapatênis"
-)
-
 val mockListProducts = listOf(
     Product(
         name = "Chuteira Nike Tiempo 10",

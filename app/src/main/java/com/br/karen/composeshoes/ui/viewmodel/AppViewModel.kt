@@ -3,6 +3,7 @@ package com.br.karen.composeshoes.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.karen.composeshoes.model.BottomAppBarItem
+import com.br.karen.composeshoes.model.EnumCategory
 import com.br.karen.composeshoes.navigation.AppDestination
 import com.br.karen.composeshoes.repository.AppRepository
 import com.br.karen.composeshoes.ui.intent.AppSideEffect
@@ -36,7 +37,7 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
             is AppUiIntent.OnFilterSelected -> onFilterSelected(filterSelected = intent.filterSelected)
             is AppUiIntent.FetchProducts -> fetchProducts(
                 filter = intent.filter,
-                category = intent.category
+                category = intent.category.titulo
             )
 
             is AppUiIntent.SearchChange -> handleTextChange(newText = intent.newText)
@@ -58,7 +59,7 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
         }
     }
 
-    private fun onFilterSelected(filterSelected: String) {
+    private fun onFilterSelected(filterSelected: EnumCategory) {
         viewModelScope.launch {
             _uiState.update { currentUiState ->
                 currentUiState.copy(selectedItemFilter = filterSelected)
@@ -69,7 +70,7 @@ class AppViewModel(private val repository: AppRepository) : ViewModel() {
     private fun fetchProducts(filter: String, category: String) {
         viewModelScope.launch {
             CoroutineScope(Dispatchers.IO).launch {
-                val products = if (filter.isBlank() && category == "Todos") {
+                val products = if (filter.isBlank() && category == EnumCategory.TODOS.titulo) {
                     repository.getAllProducts()
                 } else {
                     repository.getProducts(filter, category)

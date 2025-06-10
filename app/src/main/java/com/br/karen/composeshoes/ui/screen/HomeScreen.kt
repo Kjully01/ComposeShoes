@@ -26,8 +26,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.br.karen.composeshoes.model.EnumCategory
 import com.br.karen.composeshoes.model.Product
-import com.br.karen.composeshoes.model.mockCategories
 import com.br.karen.composeshoes.model.mockListProducts
 import com.br.karen.composeshoes.ui.components.CategoriesFilter
 import com.br.karen.composeshoes.ui.components.IconButtonCustom
@@ -42,8 +42,8 @@ fun HomeScreen(
     searchText: String = "",
     onSearchChange: (String) -> Unit,
     onClickSearch: () -> Unit,
-    selectedCategory: String,
-    onCategoryChange: (String) -> Unit,
+    selectedCategory: EnumCategory,
+    onCategoryChange: (EnumCategory) -> Unit,
     onClickProduct: (Int) -> Unit
 ) {
     val focusManager = LocalFocusManager.current
@@ -94,7 +94,7 @@ fun HomeScreen(
             }
 
             CategoriesFilter(
-                categories = mockCategories,
+                categories = EnumCategory.entries,
                 selectedCategory = selectedCategory,
                 onCategoryChange = { newCategory ->
                     onCategoryChange(newCategory)
@@ -144,7 +144,7 @@ fun HomeScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "Nada para exibir em $selectedCategory",
+                        text = "Nada para exibir em ${selectedCategory.titulo}",
                         fontSize = 20.sp,
                         letterSpacing = 0.2.sp
                     )
@@ -162,7 +162,7 @@ private fun HomeScreenPreview() {
             listProducts = mockListProducts,
             onSearchChange = {},
             onClickSearch = {},
-            selectedCategory = mockCategories[0],
+            selectedCategory = EnumCategory.entries[0],
             onCategoryChange = {},
             onClickProduct = {}
         )
@@ -177,7 +177,7 @@ private fun HomeScreenListEmptyPreview() {
             listProducts = emptyList(),
             onSearchChange = {},
             onClickSearch = {},
-            selectedCategory = mockCategories[0],
+            selectedCategory = EnumCategory.entries[0],
             onCategoryChange = {},
             onClickProduct = {}
         )
